@@ -1,0 +1,57 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+      
+ 
+<head th:fragment="head">
+	<script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.bundle.min.js}" type="application/javascript"></script>
+	<script th:src="@{/webjars/jquery/3.7.0/jquery.min.js}" type="application/javascript"></script>
+	<link rel="stylesheet" href="https://bootswatch.com/5/darkly/bootstrap.min.css" />
+	<link rel="stylesheet" th:href="@{css/style.css}"/>
+	<script th:src="@{js/main.js}" type="application/javascript"></script>
+    <title>TRAM</title>
+</head>
+<div th:fragment="nav">
+ 	<nav class="navbar navbar-dark bg-dark">
+ 	 <div class="container-fluid">
+ 	   <a class="navbar-brand">Task Reminders and Management</a>
+ 	     <div class="container" onclick="change(this)">
+ 			  <div class="bar1"></div>
+ 			  <div class="bar2"></div>
+ 			  <div class="bar3"></div>
+ 			</div>
+ 	 </div>
+ 	</nav>
+ 	
+ 	<div id="menu"class="collapse">
+ 		<div class="container-menu p-3">
+ 			<div class="inline-flex pb-2">
+ 				<label for="">Already a user?</label>
+ 				<button class="btn btn-secondary" style="float:right;" data-toggle="modal" data-target="#loginModal">Login</button>
+ 			</div>
+ 			<hr class="hr"/>
+ 			<div class="inline-flex pb-2">
+ 				<label for="">Don't have an account?</label>
+ 				<button style="float:right;" class="btn btn-secondary" id="register">Register</button>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	
+ 	<div id="loginModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+ 	 <div class="modal-dialog">
+ 	   <div class="modal-content">
+ 	     <div class="modal-header">
+ 	       <h5 class="modal-title">Modal title</h5>
+ 	       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ 	     </div>
+ 	     <div class="modal-body">
+ 	       <p>Modal body text goes here.</p>
+ 	     </div>
+ 	     <div class="modal-footer">
+ 	       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+ 	       <button type="button" class="btn btn-primary">Save changes</button>
+ 	     </div>
+ 	   </div>
+ 	 </div>
+ 	</div>
+ </div>
