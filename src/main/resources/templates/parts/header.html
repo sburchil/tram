@@ -22,7 +22,7 @@
 		</div>
 	</nav>
 
-	<div id="menu" class="collapse">
+	<div id="menu" class="collapse"> 
 		<div class="container-menu p-3">
 			<div class="inline-flex pb-2">
 				<label for="">Already a user?</label>
@@ -35,46 +35,78 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<!-- Modal -->
 	<div class="modal fade" id="loginModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Login</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
+				
 				<div class="modal-body">
-					<form th:action="@{/sampleInputs}" method="post">
+					<form th:action="@{/user/login}" id="loginForm" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" />
+							<label for="email">Email: </label>
+							<input type="text" class="form-control" name="loginEmail" id="loginEmail"/>
 						</div>
-						<input type="submit" value="Submit" />
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-primary" id="loginSave">Save changes</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="modal fade" id="registerModal">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Register</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					...
+					<form th:action="@{/user/register}" id="registerForm" method="post">
+						<div class="form-group">
+							<label for="email">Email: </label>
+							<input type="text" class="form-control" name="regEmail" id="regEmail"/>
+						</div>
+						<div class="form-group row">
+							  <div class="col-auto">
+							    <label for="regfName" class="col-form-label">First Name: </label>
+							  </div>
+							  <div class="col-auto">
+							    <input type="text" id="regfName" class="form-control" name="regfName">
+							  </div>
+							  <div class="col-auto">
+							    <label for="regfName" class="col-form-label">First Name: </label>
+							  </div>
+							  <div class="col-auto">
+							    <input type="text" id="regfName" class="form-control" name="regfName">
+							  </div>
+						</div>
+						<div class="form-group">
+							<label for="username">User name: </label>
+							<input type="text" class="form-control" name="regUsername" id="regUsername"/>
+						</div>
+						<div class="form-group">
+							<label for="pass">Password: </label>
+							<input type="password" class="form-control" name="regPass" id="regPass"/>
+						</div>
+						<div class="form-group">
+							<label for="passConfirm">Password: </label>
+							<input type="password" class="form-control" name="regPassConfirm" id="regPassConfirm"/>
+						</div>
+					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-primary" id="registerSave">Save changes</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script th:src="@{js/validation.js}"></script>
+
 </div>
