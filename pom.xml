@@ -63,6 +63,16 @@
 		    <artifactId>webjars-locator</artifactId>
 		    <version>0.30</version>
 		</dependency>
+		<dependency>
+		  <groupId>org.awaitility</groupId>
+		  <artifactId>awaitility</artifactId>
+		  <scope>test</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.json</groupId>
+		  <artifactId>json</artifactId>
+		  <version>20090211</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -71,6 +81,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				    <dependencies>
+				        <dependency>
+				            <groupId>org.springframework</groupId>
+				            <artifactId>springloaded</artifactId>
+				            <version>1.2.0.RELEASE</version>
+				        </dependency>
+				    </dependencies>
 			</plugin>
 		</plugins>
 	</build>

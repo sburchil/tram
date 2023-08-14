@@ -20,14 +20,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 		templateResolver.setPrefix("templates/");
 		templateResolver.setSuffix(".html");
+		templateResolver.setCacheable(false);
+		templateResolver.setCacheTTLMs((long) 0);
 		templateResolver.setTemplateMode(TemplateMode.HTML);
 		templateResolver.setCharacterEncoding("UTF-8");
-		templateResolver.setOrder(1);
+		templateResolver.setOrder(0);
 		templateResolver.setCheckExistence(true);
 
 		return templateResolver;
 	}
-
+	
 	@Bean
 	public SpringTemplateEngine templateEngine() {
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -45,8 +47,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
-		registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
 		registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
 	}
 }
