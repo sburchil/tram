@@ -8,6 +8,17 @@ $('#loginSave').on('click', (e) => {
 	var lName = $('#lName')
 	var username = $('#loginUsername');
 	var pass = $('#loginPass');
+
+	$.ajax({
+		url: "user/login",
+		success: function(data) {
+			console.log(data)
+			
+		},
+		error: function(err){
+			console.log(err)
+		}
+	})
 })
 
 $('#registerSave').on('click', (e) => {
