@@ -1,4 +1,4 @@
-var contextPath = "[[@{/}]]"
+var contextPath = "user"
 
 $('#loginSave').on('click', (e) => {
 	var form = $('#loginForm')[0];
@@ -10,7 +10,7 @@ $('#loginSave').on('click', (e) => {
 	var pass = $('#loginPass');
 
 	$.ajax({
-		url: "user/login",
+		url: contextPath+"/login",
 		success: function(data) {
 			console.log(data)
 			
@@ -21,24 +21,47 @@ $('#loginSave').on('click', (e) => {
 	})
 })
 
-$('#registerSave').on('click', (e) => {
+$('#registerForm').on('submit', (e) => {
+	e.preventDefault();
 	var form = $('#registerForm')[0];
 
 	var email = $('#regEmail').val();
 	var fName = $('#regfName').val();
 	var lName = $('#reglName').val();
-	var json = {
-		email : email,
-		fName : fName,
-		lName : lName
+	
+	if(email == "" || fName == "" || lName == ""){
+		$('#err_msg').html(`<strong>Error!</strong> Please fill out all fields.`);
+		$('#err_msg').animate({
+			opacity: 0.8
+		}, 500);
+		return;
 	}
-	contextPath + "/login/checkUser";
+
+	var json = {
+		regEmail : email,
+		regfName : fName,
+		reglName : lName
+	}
+
+
 	$.ajax({
-		url: "user/login/checkUser",
+		url: contextPath+"/login/checkUser",
 		data: $.param(json),
 		success: function(data) {
-			console.log(data)
-			
+			if(data == "false"){
+				$('#regEmail').addClass("is-invalid");
+
+				if($('#err_msg').css('opacity') == 0){
+					$('#err_msg').html(`<strong>Error!</strong> A user is already registered with this email address (<span style="text-decoration:underline;">${email}</span>). Please click here to <a href="${contextPath}/login">login</a>.`);
+					$('#err_msg').animate({
+						opacity: 0.8
+					}, 500, () => clearAlerts($('#err_msg')));
+				}
+				//alert("User already exists");
+			} else {
+				$('#regEmail').removeClass("is-invalid");
+				
+			}
 		},
 		error: function(err){
 			console.log(err)

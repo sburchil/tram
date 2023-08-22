@@ -17,5 +17,15 @@ public class LoginServiceImpl implements LoginService{
     public boolean doesUserHaveAccount(String email) {
         return objLoginDao.doesUserHaveAccount(email);
     }
+
+    @Override
+    public int registerUser(User objUser) {
+        return objLoginDao.registerUser(objUser);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return objLoginDao.getUserByEmail(email);
+    }
     
 }

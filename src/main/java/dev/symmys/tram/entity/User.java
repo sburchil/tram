@@ -7,7 +7,22 @@ public class User {
     String email;
     String firstName;
     String lastName;
+    String address;
+    Date createdDate;
+    String createdBy;
     Date dob;
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+    public String getCreatedBy() {
+        return createdBy;
+    }
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
     
     public long getUserId() {
         return userId;
@@ -38,5 +53,11 @@ public class User {
     }
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

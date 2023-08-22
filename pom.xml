@@ -46,13 +46,6 @@
 		    <artifactId>bootstrap</artifactId>
 		    <version>5.3.1</version>
 		</dependency>
-		
-		<dependency>
-		    <groupId>org.webjars</groupId>
-		    <artifactId>bootstrap-datepicker</artifactId>
-		    <version>1.10.0</version>
-		</dependency>
-		
 		<dependency>
 		    <groupId>org.webjars</groupId>
 		    <artifactId>jquery</artifactId>
@@ -71,7 +64,7 @@
 		<dependency>
 		  <groupId>org.json</groupId>
 		  <artifactId>json</artifactId>
-		  <version>20090211</version>
+		  <version>20230618</version>
 		</dependency>
 	</dependencies>
 

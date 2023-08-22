@@ -4,6 +4,8 @@ function change(x) {
 }
 
 $(document).ready(() => {
+	setTimeout(clearAlerts, 5000);
+
 	$('#login').on('click', function() {
 	  $('#loginModal').modal('show');
 	});
@@ -13,3 +15,16 @@ $(document).ready(() => {
 	}); 
 })
 
+function clearAlerts(elm) {
+	// Execute the function
+	setTimeout(() => {
+		if(elm.css('opacity') == 0.8){
+			elm.animate({
+				opacity: 0
+			}, 500, () => {
+				elm.html("");
+			});
+		}
+	}, 5000)
+	
+  };

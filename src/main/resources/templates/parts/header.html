@@ -1,5 +1,5 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-3.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" data-bs-theme="dark">
 
 
 <head th:fragment="head">
@@ -22,8 +22,8 @@
 		</div>
 	</nav>
 
-	<div id="menu" class="collapse"> 
-		<div class="container-menu p-3">
+	<div th:switch="${session.loggedInUser}" id="menu" class="collapse"> 
+		<div th:case="null" class="container-menu p-3">
 			<div class="inline-flex pb-2">
 				<label for="">Already a user?</label>
 				<button class="btn btn-secondary" style="float:right;" id="login">Login</button>
@@ -34,11 +34,26 @@
 				<button style="float:right;" class="btn btn-secondary" id="register">Register</button>
 			</div>
 		</div>
+		<div th:case="*" class="container-menu p-3">
+			<h3>${session.loggedInUser.FirstName}</h3>
+		</div>
 	</div>
 	
+	<!-- create bootstrap alert div -->
+
+	<div class="alerts">
+		<div class="alert alert-danger" id="err_msg" style="opacity:0;">
+
+		</div>
+		<div class="alert alert-success" id="success_msg" style="opacity:0;">
+
+		</div>
+	</div>
+
 	<!-- Modal -->
-	<div class="modal fade" id="loginModal">
-		<div class="modal-dialog">
+
+	<div th:if="${session.loggedInUser == null}" class="modal fade" id="loginModal">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Login</h5>
@@ -48,28 +63,28 @@
 					<form th:action="@{/user/login}" id="loginForm" method="post">
 						<div class="form-group">
 							<label for="email">Email: </label>
-							<input type="text" class="form-control" name="loginEmail" id="loginEmail"/>
+							<input type="text" class="form-control" name="loginEmail" id="loginEmail" maxlength="100" required/>
 						</div>
 						<div class="form-group">
 							<label for="username">User name: </label>
-							<input type="text" class="form-control" name="regUsername" id="regUsername"/>
+							<input type="text" class="form-control" name="regUsername" id="regUsername" minlength="5" maxlength="12" required/>
 						</div>
 						<div class="form-group">
 							<label for="pass">Password: </label>
-							<input type="password" class="form-control" name="regPass" id="regPass"/>
+							<input type="password" class="form-control" name="regPass" id="regPass" minlength="8" maxlength="32" required/>
 						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" id="loginSave">Save changes</button>
-				</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary" id="loginSave">Save changes</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
 	
-	<div class="modal fade" id="registerModal" style="display:none;">
-		<div class="modal-dialog modal-lg">
+	<div th:if="${session.loggedInUser == null}" class="modal fade" id="registerModal" style="display:none;">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">Register</h5>
@@ -78,25 +93,25 @@
 					<form th:action="@{/user/register}" id="registerForm" method="post">
 						<div class="form-group">
 							<label for="email">Email: </label>
-							<input type="text" class="form-control" name="regEmail" id="regEmail"/>
+							<input type="text" class="form-control" name="regEmail" id="regEmail" maxlength="100" required/>
 						</div>
 						<div class="form-group row">
 							  <div class="col-sm-6">
 							    <label for="regfName" class="col-form-label">First Name: </label>
-							    <input type="text" id="regfName" class="form-control" name="regfName">
+							    <input type="text" id="regfName" class="form-control" name="regfName" maxlength="40" required>
 							  </div>
 							  <div class="col-sm-6">
 							    <label for="reglName" class="col-form-label">Last Name: </label>
-							    <input type="text" id="reglName" class="form-control" name="reglName">
+							    <input type="text" id="reglName" class="form-control" name="reglName" maxlength="40" required>
 							  </div>
 						</div>
 
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" id="registerSave">Save changes</button>
-				</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary" id="registerSave">Register</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

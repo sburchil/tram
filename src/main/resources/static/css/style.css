@@ -13,6 +13,15 @@ footer {
    float: left;
 }
 
+.alert{
+  position: fixed;
+  top: 10%;
+  right: 18%;
+  width: 65%;
+  z-index: 999999;
+  opacity: 0.8;
+}
+
 #menu {
 	position: fixed;
 	top: 80px;

@@ -1,18 +1,10 @@
 package dev.symmys.tram.controller;
 
-import java.sql.SQLException;
-import java.util.Enumeration;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import dev.symmys.tram.entity.User;
 import dev.symmys.tram.service.LoginService;
@@ -33,15 +25,26 @@ public class UserController {
 	@GetMapping("/login/checkUser")
 	public @ResponseBody String checkIfExists(HttpServletRequest request) {
 
-		String email = request.getParameter("email");
-		String firstName = request.getParameter("fName");
-		String lastName = request.getParameter("lName");	
+		String email = request.getParameter("regEmail");
+		String firstName = request.getParameter("regfName");
+		String lastName = request.getParameter("reglName");	
 
-		boolean exists = objLoginService.doesUserHaveAccount(email);
-		System.out.println(exists);
-		JSONObject jsonObj = new JSONObject(request.getParameterMap());
+		if(objLoginService.doesUserHaveAccount(email)){
+			return "false";
+		} 
 
-		System.out.println(jsonObj.toString());
-		return "hello";
+		User objUser = new User();
+		objUser.setEmail(email);
+		objUser.setFirstName(firstName);
+		objUser.setLastName(lastName);
+
+		int count = objLoginService.registerUser(objUser);
+		objUser = objLoginService.getUserByEmail(email);
+		if(count > 0){
+			request.getSession().setAttribute("loggedInUser", objUser);
+			return "true";
+		} else {
+			return "Error While Processing Request";
+		}
 	}
 }
