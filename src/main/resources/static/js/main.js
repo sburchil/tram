@@ -28,3 +28,8 @@ function clearAlerts(elm) {
 	}, 5000)
 	
   };
+
+  function openLoginModal(){
+	$('#registerModal').modal('hide');
+	$('#loginModal').modal('show');
+  }

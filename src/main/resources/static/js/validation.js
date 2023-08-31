@@ -3,16 +3,13 @@ var contextPath = "user"
 $('#loginSave').on('click', (e) => {
 	var form = $('#loginForm')[0];
 
-	var email = $('#loginEmail');
-	var fName = $('#fName');
-	var lName = $('#lName')
 	var username = $('#loginUsername');
 	var pass = $('#loginPass');
 
 	$.ajax({
-		url: contextPath+"/login",
+		url: contextPath+"/checkifexists",
 		success: function(data) {
-			console.log(data)
+			form.submit();
 			
 		},
 		error: function(err){
@@ -45,14 +42,14 @@ $('#registerForm').on('submit', (e) => {
 
 
 	$.ajax({
-		url: contextPath+"/login/checkUser",
+		url: contextPath+"/checkifexists",
 		data: $.param(json),
 		success: function(data) {
 			if(data == "false"){
 				$('#regEmail').addClass("is-invalid");
 
 				if($('#err_msg').css('opacity') == 0){
-					$('#err_msg').html(`<strong>Error!</strong> A user is already registered with this email address (<span style="text-decoration:underline;">${email}</span>). Please click here to <a href="${contextPath}/login">login</a>.`);
+					$('#err_msg').html(`<strong>Error!</strong> A user is already registered with this email address (<span style="text-decoration:underline;">${email}</span>). Please click here to <a href="#" onclick="openLoginModal();">login</a>.`);
 					$('#err_msg').animate({
 						opacity: 0.8
 					}, 500, () => clearAlerts($('#err_msg')));

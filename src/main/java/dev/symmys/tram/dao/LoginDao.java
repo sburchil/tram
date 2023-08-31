@@ -8,4 +8,6 @@ public interface LoginDao {
     public int registerUser(User objUser);
 
     public User getUserByEmail(String email);
+
+    public User getUserByUsername(String userName);
 }

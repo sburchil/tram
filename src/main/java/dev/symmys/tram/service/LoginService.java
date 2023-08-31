@@ -9,4 +9,6 @@ public interface LoginService {
     public int registerUser(User objUser);
 
     public User getUserByEmail(String email);
+
+    public User getUserByUsername(String userName);
 }

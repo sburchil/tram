@@ -22,29 +22,20 @@ public class UserController {
 		return "model";
 	}
 	
-	@GetMapping("/login/checkUser")
+	@GetMapping("/checkifexists")
 	public @ResponseBody String checkIfExists(HttpServletRequest request) {
 
 		String email = request.getParameter("regEmail");
-		String firstName = request.getParameter("regfName");
-		String lastName = request.getParameter("reglName");	
+		String userName = request.getParameter("loginUsername");
 
-		if(objLoginService.doesUserHaveAccount(email)){
-			return "false";
-		} 
-
-		User objUser = new User();
-		objUser.setEmail(email);
-		objUser.setFirstName(firstName);
-		objUser.setLastName(lastName);
-
-		int count = objLoginService.registerUser(objUser);
-		objUser = objLoginService.getUserByEmail(email);
-		if(count > 0){
-			request.getSession().setAttribute("loggedInUser", objUser);
-			return "true";
+		if(email != null && !email.isEmpty()) {
+			User user = objLoginService.getUserByEmail(userName);
+			return (user != null) ? "true" : "false";
+		} else if(userName != null && !userName.isEmpty()) {
+			User user = objLoginService.getUserByUsername(userName);
+			return (user != null) ? "true" : "false";
 		} else {
-			return "Error While Processing Request";
+			return "false";
 		}
 	}
 }
